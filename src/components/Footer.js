@@ -17,7 +17,7 @@ function Footer() {
   return (
     <footer className="footer" data-testid="footer">
       <button
-        id="button-drinks"
+        className="button-drinks"
         label="drinks"
         src={ drinkIcon }
         name="drinks"
@@ -26,7 +26,7 @@ function Footer() {
         onClick={ handleClick }
       />
       <button
-        id="button-explore"
+        className="button-explore"
         label="explore"
         src={ exploreIcon }
         type="button"
@@ -35,7 +35,7 @@ function Footer() {
         onClick={ handleClick }
       />
       <button
-        id="button-meal"
+        className="button-meal"
         label="foods"
         src={ mealIcon }
         type="button"
