@@ -1,0 +1,25 @@
+.footer {
+  position: fixed;
+  bottom: 0px;
+}
+
+#button-drinks {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/drinkIcon.svg');
+  background-repeat: no-repeat;
+}
+
+#button-explore {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/exploreIcon.svg');
+  background-repeat: no-repeat;
+}
+
+#button-meal {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/mealIcon.svg');
+  background-repeat: no-repeat;
+}
