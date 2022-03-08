@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PASSWORD_LENGTH from '../MAGIC_NUMBER';
+import { PASSWORD_LENGTH } from '../MAGIC_NUMBER';
 
 function Login() {
   const [email, setEmail] = useState('');
