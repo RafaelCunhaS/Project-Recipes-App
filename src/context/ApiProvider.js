@@ -31,7 +31,7 @@ function ApiProvider({ children }) {
     } else if (radio === 'name') {
       apiName(path, input);
     }
-    if (input.length > 1) {
+    if (radio === 'firstLetter' && input.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       apiFirstLetter(path, input);
