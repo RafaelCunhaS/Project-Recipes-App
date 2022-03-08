@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
 
 function Header({ title, renderSearch = true }) {
-  const [teste, setTeste] = useState(false);
+  const [renderSearchBar, setRenderSearchBar] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
 
@@ -26,11 +26,11 @@ function Header({ title, renderSearch = true }) {
           src={ searchIcon }
           data-testid="search-top-btn"
           alt="search"
-          onClick={ () => setTeste(!teste) }
+          onClick={ () => setRenderSearchBar(!renderSearchBar) }
         />
       )}
 
-      {teste && (
+      {renderSearchBar && (
         <input
           data-testid="search-input"
           type="text"
