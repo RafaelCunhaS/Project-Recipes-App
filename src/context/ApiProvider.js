@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import apiContext from './apiContext';
+import { apiIngredients, apiName, apiFirstLetter } from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
@@ -8,7 +9,11 @@ function ApiProvider({ children }) {
   );
 
   const getPathName = (e) => {
-    setApiDetails({ ...apiDetails, path: e });
+    if (e === '/foods') {
+      setApiDetails({ ...apiDetails, path: 'themealdb' });
+    } else {
+      setApiDetails({ ...apiDetails, path: 'thecocktaildb' });
+    }
   };
 
   const getRadioValue = ({ value }) => {
@@ -21,14 +26,15 @@ function ApiProvider({ children }) {
 
   const callApi = () => {
     const { path, radio, input } = apiDetails;
-    if (path === '/foods' && radio === 'ingredient') {
-      console.log(input);
+    if (radio === 'ingredient') {
+      apiIngredients(path, input);
+    } else if (radio === 'name') {
+      apiName(path, input);
     }
-    if (path === '/foods' && radio === 'name') {
-      console.log('food.name');
-    }
-    if (path === '/foods' && radio === 'firstLetter') {
-      console.log('food.firstLetter');
+    if (input.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      apiFirstLetter(path, input);
     }
   };
 
