@@ -6,32 +6,31 @@ import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
 
 function Header({ title, renderSearch = true }) {
-  const [teste, setTeste] = useState(false);
+  const [renderSearchBar, setRenderSearchBar] = useState(false);
   const history = useHistory();
+  const { pathname } = history.location;
+
   return (
-    <header>
-      <button
-        className="button-profile"
-        type="button"
+    <header className="header">
+      <input
+        type="image"
         src={ profile }
         data-testid="profile-top-btn"
-        onClick={ () => history.push('/profile') }
-        label="profile"
+        alt="profile"
+        onClick={ () => pathname !== '/profile' && history.push('/profile') }
       />
-
       <h2 data-testid="page-title">{title}</h2>
       {renderSearch && (
-        <button
-          className="button-search"
-          data-testid="search-top-btn"
+        <input
+          type="image"
           src={ searchIcon }
-          type="button"
-          label="search"
-          onClick={ () => setTeste(!teste) }
+          data-testid="search-top-btn"
+          alt="search"
+          onClick={ () => setRenderSearchBar(!renderSearchBar) }
         />
       )}
 
-      {teste && (
+      {renderSearchBar && (
         <input
           data-testid="search-input"
           type="text"

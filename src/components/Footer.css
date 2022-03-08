@@ -2,24 +2,3 @@
   bottom: 0;
   position: fixed;
 }
-
-.button-drinks {
-  background-image: url('../images/drinkIcon.svg');
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
-}
-
-.button-explore {
-  background-image: url('../images/exploreIcon.svg');
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
-}
-
-.button-meal {
-  background-image: url('../images/mealIcon.svg');
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
-}

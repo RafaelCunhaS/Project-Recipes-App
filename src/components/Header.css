@@ -1,13 +1,5 @@
-.button-profile {
-  background-image: url('../images/profileIcon.svg');
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
-}
-
-.button-search {
-  background-image: url('../images/searchIcon.svg');
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 40px;
+.header {
+  background-color: #c4c4c4;
+  display: flex;
+  justify-content: space-between;
 }

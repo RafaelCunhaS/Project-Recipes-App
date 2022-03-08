@@ -7,40 +7,38 @@ import './Footer.css';
 
 function Footer() {
   const history = useHistory();
+  const { pathname } = history.location;
 
   const handleClick = ({ target: { name } }) => {
-    if (name === 'drinks') history.push('/drinks');
-    if (name === 'explore') history.push('/explore');
-    if (name === 'foods') history.push('/foods');
+    if (name === '/drinks' && name !== pathname) history.push('/drinks');
+    if (name === '/explore' && name !== pathname) history.push('/explore');
+    if (name === '/foods' && name !== pathname) history.push('/foods');
   };
 
   return (
     <footer className="footer" data-testid="footer">
-      <button
-        className="button-drinks"
-        label="drinks"
+      <input
+        type="image"
+        name="/drinks"
         src={ drinkIcon }
-        name="drinks"
-        type="button"
         data-testid="drinks-bottom-btn"
+        alt="drinks"
         onClick={ handleClick }
       />
-      <button
-        className="button-explore"
-        label="explore"
+      <input
+        type="image"
+        name="/explore"
         src={ exploreIcon }
-        type="button"
-        name="explore"
         data-testid="explore-bottom-btn"
+        alt="explore"
         onClick={ handleClick }
       />
-      <button
-        className="button-meal"
-        label="foods"
+      <input
+        type="image"
+        name="/foods"
         src={ mealIcon }
-        type="button"
-        name="foods"
         data-testid="food-bottom-btn"
+        alt="foods"
         onClick={ handleClick }
       />
     </footer>
