@@ -8,6 +8,8 @@ function ApiProvider({ children }) {
     { path: '', radio: 'ingredient', input: '' },
   );
 
+  const [recipes, setRecipes] = useState([]);
+
   const getPathName = (e) => {
     if (e === '/foods') {
       setApiDetails({ ...apiDetails, path: 'themealdb' });
@@ -24,21 +26,29 @@ function ApiProvider({ children }) {
     setApiDetails({ ...apiDetails, input: value });
   };
 
-  const callApi = () => {
+  const callApi = async () => {
     const { path, radio, input } = apiDetails;
     if (radio === 'ingredient') {
-      apiIngredients(path, input);
-    } else if (radio === 'name') {
-      apiName(path, input);
+      const ingredients = await apiIngredients(path, input);
+      setRecipes(ingredients);
+      return ingredients;
     }
-    if (input.length > 1) {
+    if (radio === 'name') {
+      const name = await apiName(path, input);
+      setRecipes(name);
+      return name;
+    }
+    if (radio === 'firstLetter' && input.length > 1) {
       global.alert('Your search must have only 1 (one) character');
-    } else {
-      apiFirstLetter(path, input);
+    } else if (radio === 'firstLetter') {
+      const firstLetter = await apiFirstLetter(path, input);
+      setRecipes(firstLetter);
+      return firstLetter;
     }
   };
 
-  const context = { getPathName, getRadioValue, getInputValue, callApi };
+  const context = {
+    apiDetails, getPathName, getRadioValue, getInputValue, callApi, recipes };
   return (
     <apiContext.Provider value={ context }>
       {children}
