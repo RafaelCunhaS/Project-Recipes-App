@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import apiContext from './apiContext';
-import { apiIngredients, apiName, apiFirstLetter } from '../services/useApi';
+import {
+  apiIngredients,
+  apiName,
+  apiFirstLetter,
+  apiCategory,
+  apiCategoryDrinks,
+} from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '' },
+    { path: '', radio: 'ingredient', input: '', call: false },
   );
 
   const [recipes, setRecipes] = useState([]);
+  const location = useLocation();
 
-  const getPathName = (e) => {
+  const getPathName = async (e) => {
     if (e === '/foods') {
       setApiDetails({ ...apiDetails, path: 'themealdb' });
     } else {
       setApiDetails({ ...apiDetails, path: 'thecocktaildb' });
+    }
+  };
+
+  const getCategory = async ({ textContent }) => {
+    if (location.pathname === '/foods') {
+      const categoryFilter = await apiCategory(textContent);
+      setRecipes(categoryFilter);
+    } else {
+      const categoryFilterDrink = await apiCategoryDrinks(textContent);
+      setRecipes(categoryFilterDrink);
     }
   };
 
@@ -27,6 +45,7 @@ function ApiProvider({ children }) {
   };
 
   const callApi = async () => {
+    setApiDetails({ ...apiDetails, call: true });
     const { path, radio, input } = apiDetails;
     if (radio === 'ingredient') {
       const ingredients = await apiIngredients(path, input);
@@ -48,7 +67,14 @@ function ApiProvider({ children }) {
   };
 
   const context = {
-    apiDetails, getPathName, getRadioValue, getInputValue, callApi, recipes };
+    apiDetails,
+    getPathName,
+    getRadioValue,
+    getInputValue,
+    callApi,
+    recipes,
+    getCategory,
+  };
   return (
     <apiContext.Provider value={ context }>
       {children}
