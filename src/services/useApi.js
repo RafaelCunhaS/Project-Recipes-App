@@ -15,3 +15,15 @@ export const apiFirstLetter = async (path, input) => {
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };
+
+export const apiCategory = async (category) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const apiCategoryDrinks = async (category) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
