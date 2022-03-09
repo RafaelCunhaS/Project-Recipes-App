@@ -22,6 +22,8 @@ function RecipeCards() {
                   src={ strMealThumb }
                   alt="cardRecipe"
                   data-testid={ `${index}-card-img` }
+                  width="150"
+                  height="150"
                 />
                 <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
               </section>
@@ -40,6 +42,8 @@ function RecipeCards() {
                   src={ strDrinkThumb }
                   alt="cardRecipe"
                   data-testid={ `${index}-card-img` }
+                  width="150"
+                  height="150"
                 />
                 <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
               </section>

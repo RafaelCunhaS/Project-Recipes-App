@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PASSWORD_LENGTH } from '../MAGIC_NUMBER';
 
@@ -14,10 +14,13 @@ function Login() {
     } else {
       setPassword(value);
     }
+  }
+
+  useEffect(() => {
     if (email.includes('@' && '.com') && password.length >= PASSWORD_LENGTH) {
       setButton(false);
-    }
-  }
+    } else setButton(true);
+  }, [email, password]);
 
   function handleClick() {
     localStorage.setItem('mealsToken', 1);
