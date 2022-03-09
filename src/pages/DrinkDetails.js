@@ -11,8 +11,7 @@ function DrinkDetails() {
 
   useEffect(() => {
     apiName('themealdb')
-      .then((data) => setRecomendations(data.meals))
-      .catch((_error) => console.log('xablau'));
+      .then((data) => setRecomendations(data.meals));
     getDrinkById(id)
       .then((data) => {
         setRecipeDetails(data.drinks[0]);

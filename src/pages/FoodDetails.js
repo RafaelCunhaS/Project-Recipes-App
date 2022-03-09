@@ -13,8 +13,7 @@ function FoodDetails() {
 
   useEffect(() => {
     apiName('thecocktaildb')
-      .then((data) => setRecomendations(data.drinks))
-      .catch((_e) => console.log('xablau'));
+      .then((data) => setRecomendations(data.drinks));
     getFoodById(id)
       .then((data) => {
         setUrl(data.meals[0].strYoutube.replace(/[^=]*(=)/, 'https://www.youtube.com/embed/'));
