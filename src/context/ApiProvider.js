@@ -5,18 +5,20 @@ import { apiIngredients, apiName, apiFirstLetter } from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '' },
+    { path: '', radio: 'ingredient', input: '', call: false },
   );
 
   const [recipes, setRecipes] = useState([]);
 
-  const getPathName = (e) => {
+  const getPathName = async (e) => {
     if (e === '/foods') {
       setApiDetails({ ...apiDetails, path: 'themealdb' });
     } else {
       setApiDetails({ ...apiDetails, path: 'thecocktaildb' });
     }
   };
+
+  console.log(apiDetails.path);
 
   const getRadioValue = ({ value }) => {
     setApiDetails({ ...apiDetails, radio: value });
@@ -27,6 +29,7 @@ function ApiProvider({ children }) {
   };
 
   const callApi = async () => {
+    setApiDetails({ ...apiDetails, call: true });
     const { path, radio, input } = apiDetails;
     if (radio === 'ingredient') {
       const ingredients = await apiIngredients(path, input);

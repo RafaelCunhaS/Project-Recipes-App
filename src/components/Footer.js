@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import apiContext from '../context/apiContext';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
@@ -8,11 +9,18 @@ import './Footer.css';
 function Footer() {
   const history = useHistory();
   const { pathname } = history.location;
+  const { getPathName } = useContext(apiContext);
 
   const handleClick = ({ target: { name } }) => {
-    if (name === '/drinks' && name !== pathname) history.push('/drinks');
+    if (name === '/drinks' && name !== pathname) {
+      history.push('/drinks');
+      getPathName('/drinks');
+    }
     if (name === '/explore' && name !== pathname) history.push('/explore');
-    if (name === '/foods' && name !== pathname) history.push('/foods');
+    if (name === '/foods' && name !== pathname) {
+      history.push('/foods');
+      getPathName('/foods');
+    }
   };
 
   return (
