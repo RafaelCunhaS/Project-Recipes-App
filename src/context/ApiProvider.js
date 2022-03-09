@@ -5,7 +5,7 @@ import { apiIngredients, apiName, apiFirstLetter } from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '', call: false },
+    { path: '', radio: 'ingredient', input: '', call: false, category: '' },
   );
 
   const [recipes, setRecipes] = useState([]);
@@ -18,7 +18,9 @@ function ApiProvider({ children }) {
     }
   };
 
-  console.log(apiDetails.path);
+  const getCategory = ({ textContent }) => {
+    setApiDetails({ ...apiDetails, category: textContent });
+  };
 
   const getRadioValue = ({ value }) => {
     setApiDetails({ ...apiDetails, radio: value });
@@ -51,7 +53,13 @@ function ApiProvider({ children }) {
   };
 
   const context = {
-    apiDetails, getPathName, getRadioValue, getInputValue, callApi, recipes };
+    apiDetails,
+    getPathName,
+    getRadioValue,
+    getInputValue,
+    callApi,
+    recipes,
+    getCategory };
   return (
     <apiContext.Provider value={ context }>
       {children}
