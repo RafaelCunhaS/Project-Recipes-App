@@ -6,7 +6,6 @@ import { MAX_FOOD_ARRAY } from '../MAGIC_NUMBER';
 function RecipeCardsOnLoadHelper() {
   const location = useLocation();
   const { recipes } = useContext(apiContext);
-  console.log(recipes);
   return (
     <div>
       {location.pathname === '/foods'

@@ -20,6 +20,16 @@ function RecipeCardsHelper() {
     }
   };
 
+  if (recipes !== undefined && location.pathname === '/foods') {
+    localStorage.setItem('Meals', JSON.stringify(recipes.meals));
+  }
+
+  if (recipes !== undefined && location.pathname === '/drinks') {
+    localStorage.setItem(
+      'Drinks', JSON.stringify(recipes.drinks.slice(0, MAX_FOOD_ARRAY)),
+    );
+  }
+
   useEffect(() => {
     getData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
