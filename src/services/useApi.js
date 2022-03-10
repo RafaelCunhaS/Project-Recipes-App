@@ -5,7 +5,12 @@ export const apiIngredients = async (path, input) => {
 };
 
 export const apiName = async (path, input) => {
-  const URL = `https://www.${path}.com/api/json/v1/1/search.php?s=${input}`;
+  if (input) {
+    const URL = `https://www.${path}.com/api/json/v1/1/search.php?s=${input}`;
+    const data = await fetch(URL).then((response) => response.json());
+    return data;
+  }
+  const URL = `https://www.${path}.com/api/json/v1/1/search.php?s=`;
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };
@@ -16,8 +21,20 @@ export const apiFirstLetter = async (path, input) => {
   return data;
 };
 
+export const getFoodById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
 export const apiCategory = async (category) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getDrinkById = async (id) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };

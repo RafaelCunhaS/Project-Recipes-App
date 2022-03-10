@@ -5,6 +5,7 @@ import profile from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
 import apiContext from '../context/apiContext';
+import RadioSearch from './RadioSearch';
 
 function Header({ title, renderSearch = true }) {
   const [renderSearchBar, setRenderSearchBar] = useState(false);
@@ -37,11 +38,14 @@ function Header({ title, renderSearch = true }) {
       </header>
       <div>
         {renderSearchBar && (
-          <input
-            onChange={ ({ target }) => getInputValue(target) }
-            data-testid="search-input"
-            type="text"
-          />
+          <div>
+            <input
+              onChange={ ({ target }) => getInputValue(target) }
+              data-testid="search-input"
+              type="text"
+            />
+            <RadioSearch />
+          </div>
         )}
       </div>
     </>
