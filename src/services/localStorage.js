@@ -1,12 +1,15 @@
 const FAVORITE_RECIPES_KEY = 'favoriteRecipes';
 const DONE_RECIPES_KEY = 'doneRecipes';
 const IN_PROGRESS_KEY = 'inProgressRecipes';
+const USER_KEY = 'user';
 
 export const readFavorites = () => JSON.parse(localStorage.getItem(FAVORITE_RECIPES_KEY));
 
 const readDoneRecipes = () => JSON.parse(localStorage.getItem(DONE_RECIPES_KEY));
 
 const readInProgress = () => JSON.parse(localStorage.getItem(IN_PROGRESS_KEY));
+
+export const readEmail = () => JSON.parse(localStorage.getItem(USER_KEY));
 
 const saveFavorites = (favorite) => localStorage
   .setItem(FAVORITE_RECIPES_KEY, JSON.stringify(favorite));
