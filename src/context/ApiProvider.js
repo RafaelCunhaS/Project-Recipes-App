@@ -1,20 +1,63 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import apiContext from './apiContext';
-import { apiIngredients, apiName, apiFirstLetter } from '../services/useApi';
+import {
+  apiIngredients,
+  apiName,
+  apiFirstLetter,
+  apiCategory,
+  apiCategoryDrinks,
+  apiFilterByAll,
+} from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '' },
+    { path: '', radio: 'ingredient', input: '', call: false, category: '' },
   );
 
   const [recipes, setRecipes] = useState([]);
+  const location = useLocation();
 
-  const getPathName = (e) => {
+  const getPathName = async (e) => {
     if (e === '/foods') {
       setApiDetails({ ...apiDetails, path: 'themealdb' });
     } else {
       setApiDetails({ ...apiDetails, path: 'thecocktaildb' });
+    }
+  };
+
+  const filterByAll = async ({ textContent }) => {
+    setApiDetails({ ...apiDetails, category: textContent });
+    if (location.pathname === '/foods') {
+      const filterByAllCategories = await apiFilterByAll('themealdb');
+      setRecipes(filterByAllCategories);
+    } else if (location.pathname === '/drinks') {
+      const filterByAllCategories = await apiFilterByAll('thecocktaildb');
+      setRecipes(filterByAllCategories);
+    }
+  };
+
+  const getCategory = async ({ textContent }) => {
+    setApiDetails({ ...apiDetails, category: textContent });
+    if (location.pathname === '/foods') {
+      const categoryFilter = await apiCategory(textContent);
+      setRecipes(categoryFilter);
+      if (apiDetails.category === textContent) {
+        const teste = JSON.parse(localStorage.getItem('Meals'));
+        setRecipes(teste);
+        setApiDetails({ ...apiDetails, category: '' });
+      }
+    }
+
+    if (location.pathname === '/drinks') {
+      const categoryFilter = await apiCategoryDrinks(textContent);
+      setRecipes(categoryFilter);
+      if (apiDetails.category === textContent) {
+        const teste = JSON.parse(localStorage.getItem('Drinks'));
+        setRecipes(teste);
+        setApiDetails({ ...apiDetails, category: '' });
+      }
     }
   };
 
@@ -27,6 +70,7 @@ function ApiProvider({ children }) {
   };
 
   const callApi = async () => {
+    setApiDetails({ ...apiDetails, call: true });
     const { path, radio, input } = apiDetails;
     if (radio === 'ingredient') {
       const ingredients = await apiIngredients(path, input);
@@ -48,7 +92,15 @@ function ApiProvider({ children }) {
   };
 
   const context = {
-    apiDetails, getPathName, getRadioValue, getInputValue, callApi, recipes };
+    apiDetails,
+    getPathName,
+    getRadioValue,
+    getInputValue,
+    callApi,
+    recipes,
+    getCategory,
+    filterByAll,
+  };
   return (
     <apiContext.Provider value={ context }>
       {children}
