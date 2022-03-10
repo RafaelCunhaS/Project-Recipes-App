@@ -27,3 +27,9 @@ export const apiCategoryDrinks = async (category) => {
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };
+
+export const apiFilterByAll = async (path) => {
+  const URL = `https://www.${path}.com/api/json/v1/1/search.php?s=`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
