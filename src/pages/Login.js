@@ -17,7 +17,8 @@ function Login() {
   }
 
   useEffect(() => {
-    if (email.includes('@' && '.com') && password.length >= PASSWORD_LENGTH) {
+    if (email.includes('.com') && email.includes('@')
+    && password.length > PASSWORD_LENGTH) {
       setButton(false);
     } else setButton(true);
   }, [email, password]);
