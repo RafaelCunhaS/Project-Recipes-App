@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Carousel from 'react-elastic-carousel';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { RECOMENDATIONS_LENGTH } from '../MAGIC_NUMBER';
 import { apiName, getDrinkById } from '../services/useApi';
+import ShareButton from '../components/ShareButton';
+import FavoritesButton from '../components/FavoritesButton';
+import './DrinkDetails.css';
+import { checkDoneRecipes, checkInProgress } from '../services/localStorage';
 
 function DrinkDetails() {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [recomendations, setRecomendations] = useState([]);
+  const [renderButton, setRenderButton] = useState(true);
+  const [continueRecipe, setContinueRecipe] = useState(false);
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     apiName('themealdb')
@@ -15,7 +21,8 @@ function DrinkDetails() {
     getDrinkById(id)
       .then((data) => {
         setRecipeDetails(data.drinks[0]);
-        console.log(data.drinks);
+        if (checkDoneRecipes(data.drinks[0].idDrink)) setRenderButton(false);
+        if (checkInProgress(data.drinks[0].idDrink)) setContinueRecipe(true);
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -30,8 +37,8 @@ function DrinkDetails() {
         height="150"
       />
       <h2 data-testid="recipe-title">{recipeDetails.strDrink}</h2>
-      <input type="image" data-testid="share-btn" alt="Share" />
-      <input type="image" data-testid="favorite-btn" alt="Favorite" />
+      <ShareButton />
+      <FavoritesButton recipeDetails={ recipeDetails } />
       <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
       {Object.keys(recipeDetails)
         .filter((e) => e.includes('strIngredient'))
@@ -46,29 +53,33 @@ function DrinkDetails() {
             {recipeDetails[measure]}
           </span>))}
       <p data-testid="instructions">{recipeDetails.strInstructions}</p>
-      <Carousel itemsToShow={ 2 }>
-        <section data-testid="recomendation-card">
-          {recomendations.splice(0, RECOMENDATIONS_LENGTH)
-            .map((card, index) => (
-              <section key={ card.idMeal } data-testid={ `${index}-recomendation-card` }>
-                <img
-                  src={ card.strMealThumb }
-                  alt="Recommended meal"
-                  width="70"
-                  height="70"
-                />
-                <h4>{card.strCategory}</h4>
-                <h2>{card.strMeal}</h2>
-              </section>))}
-        </section>
-      </Carousel>
-      <button
-        className="start-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Start Recipe
-      </button>
+      <div className="recommended-cards-container">
+        {recomendations.slice(0, RECOMENDATIONS_LENGTH)
+          .map((card, index) => (
+            <section
+              className="recommended-cards"
+              key={ card.idMeal }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              <img
+                src={ card.strMealThumb }
+                alt="Recommended meal"
+                width="140"
+                height="140"
+              />
+              <h4>{card.strCategory}</h4>
+              <h2 data-testid={ `${index}-recomendation-title` }>{card.strMeal}</h2>
+            </section>))}
+      </div>
+      {renderButton && (
+        <button
+          className="start-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ () => history.push(`/drinks/${id}/in-progress`) }
+        >
+          {continueRecipe ? 'Continue Recipe' : 'Start Recipe'}
+        </button>)}
     </section>
   );
 }
