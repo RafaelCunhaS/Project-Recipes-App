@@ -6,7 +6,7 @@ import { MAX_FOOD_CATEGORY } from '../MAGIC_NUMBER';
 function Category() {
   const location = useLocation();
   const [category, setCategory] = useState();
-  const { getCategory } = useContext(apiContext);
+  const { getCategory, filterByAll } = useContext(apiContext);
 
   const getCategories = async () => {
     if (location.pathname === '/foods') {
@@ -27,6 +27,13 @@ function Category() {
 
   return (
     <div>
+      <button
+        onClick={ ({ target }) => filterByAll(target) }
+        type="button"
+        data-testid="All-category-filter"
+      >
+        Alls
+      </button>
       {category !== undefined && location.pathname === '/foods'
         ? (
           category.meals.slice(0, MAX_FOOD_CATEGORY).map(({ strCategory }, index) => (

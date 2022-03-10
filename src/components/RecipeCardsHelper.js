@@ -21,13 +21,11 @@ function RecipeCardsHelper() {
   };
 
   if (recipes !== undefined && location.pathname === '/foods') {
-    localStorage.setItem('Meals', JSON.stringify(recipes.meals));
+    localStorage.setItem('Meals', JSON.stringify(recipes));
   }
 
   if (recipes !== undefined && location.pathname === '/drinks') {
-    localStorage.setItem(
-      'Drinks', JSON.stringify(recipes.drinks.slice(0, MAX_FOOD_ARRAY)),
-    );
+    localStorage.setItem('Drinks', JSON.stringify(recipes));
   }
 
   useEffect(() => {

@@ -8,11 +8,12 @@ import {
   apiFirstLetter,
   apiCategory,
   apiCategoryDrinks,
+  apiFilterByAll,
 } from '../services/useApi';
 
 function ApiProvider({ children }) {
   const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '', call: false },
+    { path: '', radio: 'ingredient', input: '', call: false, category: '' },
   );
 
   const [recipes, setRecipes] = useState([]);
@@ -26,13 +27,37 @@ function ApiProvider({ children }) {
     }
   };
 
+  const filterByAll = async ({ textContent }) => {
+    setApiDetails({ ...apiDetails, category: textContent });
+    if (location.pathname === '/foods') {
+      const filterByAllCategories = await apiFilterByAll('themealdb');
+      setRecipes(filterByAllCategories);
+    } else if (location.pathname === '/drinks') {
+      const filterByAllCategories = await apiFilterByAll('thecocktaildb');
+      setRecipes(filterByAllCategories);
+    }
+  };
+
   const getCategory = async ({ textContent }) => {
+    setApiDetails({ ...apiDetails, category: textContent });
     if (location.pathname === '/foods') {
       const categoryFilter = await apiCategory(textContent);
       setRecipes(categoryFilter);
-    } else {
-      const categoryFilterDrink = await apiCategoryDrinks(textContent);
-      setRecipes(categoryFilterDrink);
+      if (apiDetails.category === textContent) {
+        const teste = JSON.parse(localStorage.getItem('Meals'));
+        setRecipes(teste);
+        setApiDetails({ ...apiDetails, category: '' });
+      }
+    }
+
+    if (location.pathname === '/drinks') {
+      const categoryFilter = await apiCategoryDrinks(textContent);
+      setRecipes(categoryFilter);
+      if (apiDetails.category === textContent) {
+        const teste = JSON.parse(localStorage.getItem('Drinks'));
+        setRecipes(teste);
+        setApiDetails({ ...apiDetails, category: '' });
+      }
     }
   };
 
@@ -74,6 +99,7 @@ function ApiProvider({ children }) {
     callApi,
     recipes,
     getCategory,
+    filterByAll,
   };
   return (
     <apiContext.Provider value={ context }>
