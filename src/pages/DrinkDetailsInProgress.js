@@ -32,6 +32,7 @@ function DrinkDetailsInProgress(props) {
 
   const getInstructions = () => {
     if (drinks.length === 1) {
+      addDrinkDetailsInProgress(id, drinks);
       const dataDrinks = drinks[0];
       const instructionsList = [];
       const filterKey = Object.keys(drinks[0]).filter((e) => e.includes('Instructions'));
@@ -49,10 +50,6 @@ function DrinkDetailsInProgress(props) {
     getInstructions();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drinks]);
-
-  if (drinks.length === 1) {
-    addDrinkDetailsInProgress(id, drinks);
-  }
 
   return (
     <div>
