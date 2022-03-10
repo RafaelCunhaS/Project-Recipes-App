@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import apiContext from '../context/apiContext';
 import { MAX_FOOD_ARRAY } from '../MAGIC_NUMBER';
 
@@ -43,11 +43,15 @@ function RecipeCardsHelper() {
                 key={ idMeal }
                 data-testid={ `${index}-recipe-card` }
               >
-                <img
-                  src={ strMealThumb }
-                  alt="cardRecipe"
-                  data-testid={ `${index}-card-img` }
-                />
+                <Link
+                  to={ `/foods/${idMeal}` }
+                >
+                  <img
+                    src={ strMealThumb }
+                    alt="cardRecipe"
+                    data-testid={ `${index}-card-img` }
+                  />
+                </Link>
                 <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
               </section>
             ))
@@ -61,11 +65,15 @@ function RecipeCardsHelper() {
                 key={ idDrink }
                 data-testid={ `${index}-recipe-card` }
               >
-                <img
-                  src={ strDrinkThumb }
-                  alt="cardRecipe"
-                  data-testid={ `${index}-card-img` }
-                />
+                <Link
+                  to={ `/drinks/${idDrink}` }
+                >
+                  <img
+                    src={ strDrinkThumb }
+                    alt="cardRecipe"
+                    data-testid={ `${index}-card-img` }
+                  />
+                </Link>
                 <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
               </section>
             ))
