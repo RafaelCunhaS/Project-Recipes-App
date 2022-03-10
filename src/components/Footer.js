@@ -32,6 +32,8 @@ function Footer() {
         data-testid="drinks-bottom-btn"
         alt="drinks"
         onClick={ handleClick }
+        width="60"
+        height="60"
       />
       <input
         type="image"
@@ -40,6 +42,8 @@ function Footer() {
         data-testid="explore-bottom-btn"
         alt="explore"
         onClick={ handleClick }
+        width="60"
+        height="60"
       />
       <input
         type="image"
@@ -48,6 +52,8 @@ function Footer() {
         data-testid="food-bottom-btn"
         alt="foods"
         onClick={ handleClick }
+        width="60"
+        height="60"
       />
     </footer>
   );

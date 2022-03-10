@@ -50,6 +50,8 @@ function RecipeCardsHelper() {
                     src={ strMealThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
+                    width="150"
+                    height="150"
                   />
                 </Link>
                 <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
@@ -72,6 +74,8 @@ function RecipeCardsHelper() {
                     src={ strDrinkThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
+                    width="150"
+                    height="150"
                   />
                 </Link>
                 <p data-testid={ `${index}-card-name` }>{ strDrink }</p>

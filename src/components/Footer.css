@@ -1,5 +1,9 @@
 .footer {
-  background-color: gray;
+  align-items: center;
   bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
   position: fixed;
+  width: 100%;
 }
