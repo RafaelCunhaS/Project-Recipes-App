@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import { RECOMENDATIONS_LENGTH } from '../MAGIC_NUMBER';
 import { apiName, getDrinkById } from '../services/useApi';
@@ -83,5 +84,11 @@ function DrinkDetails() {
     </section>
   );
 }
+
+DrinkDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.number),
+  }),
+}.isRequired;
 
 export default DrinkDetails;

@@ -52,3 +52,31 @@ export const removeFavorite = (id) => {
     saveFavorites(favorites);
   }
 };
+
+export const addDrinkDetailsInProgress = (id, drinks) => {
+  if ('inProgressRecipes' in localStorage) {
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { cocktails: { ...progressRecipes.cocktails, [id]: drinks[0] },
+        meals: { ...progressRecipes.meals } },
+    ));
+  } else {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { cocktails: { [id]: drinks[0] }, meals: {} },
+    ));
+  }
+};
+
+export const addFoodDetailsInProgress = (id, meals) => {
+  if ('inProgressRecipes' in localStorage) {
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { cocktails: { ...progressRecipes.cocktails },
+        meals: { ...progressRecipes.meals, [id]: meals[0] } },
+    ));
+  } else {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { meals: { [id]: meals[0] }, cocktails: {} },
+    ));
+  }
+};
