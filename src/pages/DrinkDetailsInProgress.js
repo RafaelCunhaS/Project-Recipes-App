@@ -4,6 +4,7 @@ import ShareButton from '../components/ShareButton';
 import { getDrinkById } from '../services/useApi';
 import FavoritesButton from '../components/FavoritesButton';
 import { addDrinkDetailsInProgress } from '../services/localStorage';
+import DrinkIngredients from '../components/DrinkIngredients';
 
 function DrinkDetailsInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -62,7 +63,7 @@ function DrinkDetailsInProgress(props) {
             <FavoritesButton recipeDetails={ drinks } />
             <p data-testid="recipe-category">{ drinks[0].strCategory }</p>
             {ingredients.map((e, index) => (
-              <p data-testid={ `${index}-ingredient-step` } key={ index }>{e}</p>
+              <DrinkIngredients key={ index } ingredients={ e } />
             ))}
             {instructions.map((e, index) => (
               <p data-testid="instructions" key={ index }>{e}</p>

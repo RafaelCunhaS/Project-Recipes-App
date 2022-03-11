@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ShareButton from '../components/ShareButton';
 import FavoritesButton from '../components/FavoritesButton';
+import FoodIngredients from '../components/FoodIngredients';
 import { addFoodDetailsInProgress } from '../services/localStorage';
 import { getFoodById } from '../services/useApi';
 
@@ -62,7 +63,7 @@ function FoodDetailsInProgress(props) {
             <FavoritesButton recipeDetails={ foods } />
             <p data-testid="recipe-category">{ foods[0].strCategory }</p>
             {ingredients.map((e, index) => (
-              <p data-testid={ `${index}-ingredient-step` } key={ index }>{e}</p>
+              <FoodIngredients key={ index } ingredients={ e } />
             ))}
             {instructions.map((e, index) => (
               <p data-testid="instructions" key={ index }>{e}</p>
