@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ShareButton from '../components/ShareButton';
 import FavoritesButton from '../components/FavoritesButton';
 import FoodIngredients from '../components/FoodIngredients';
-import { addFoodDetailsInProgress } from '../services/localStorage';
 import { getFoodById } from '../services/useApi';
 
 function FoodDetailsInProgress(props) {
@@ -33,7 +32,6 @@ function FoodDetailsInProgress(props) {
 
   const getInstructions = () => {
     if (foods.length === 1) {
-      addFoodDetailsInProgress(id, foods);
       const dataFoods = foods[0];
       const instructionsList = [];
       const filterKey = Object.keys(dataFoods).filter((e) => e.includes('Instructions'));
@@ -63,7 +61,12 @@ function FoodDetailsInProgress(props) {
             <FavoritesButton recipeDetails={ foods } />
             <p data-testid="recipe-category">{ foods[0].strCategory }</p>
             {ingredients.map((e, index) => (
-              <FoodIngredients key={ index } ingredients={ e } />
+              <FoodIngredients
+                key={ index }
+                ingredients={ e }
+                id={ id }
+                index={ index }
+              />
             ))}
             {instructions.map((e, index) => (
               <p data-testid="instructions" key={ index }>{e}</p>

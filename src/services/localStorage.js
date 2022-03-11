@@ -67,16 +67,50 @@ export const addDrinkDetailsInProgress = (id, drinks) => {
   }
 };
 
-export const addFoodDetailsInProgress = (id, meals) => {
+export const addFoodIngredients = (id, ingredients) => {
   if ('inProgressRecipes' in localStorage) {
     const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const teste = [...progressRecipes.meals[id], ingredients];
     localStorage.setItem('inProgressRecipes', JSON.stringify(
       { cocktails: { ...progressRecipes.cocktails },
-        meals: { ...progressRecipes.meals, [id]: meals[0] } },
+        meals: { [id]: teste } },
     ));
   } else {
     localStorage.setItem('inProgressRecipes', JSON.stringify(
-      { meals: { [id]: meals[0] }, cocktails: {} },
+      { meals: { [id]: [ingredients] }, cocktails: {} },
     ));
   }
+};
+
+export const removeFoodIngredients = (id, ingredients) => {
+  const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const teste = progressRecipes.meals[id].filter((e) => e !== ingredients);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    { cocktails: { ...progressRecipes.cocktails },
+      meals: { [id]: teste } },
+  ));
+};
+
+export const addDrinkIngredients = (id, ingredients) => {
+  if ('inProgressRecipes' in localStorage) {
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const teste = [...progressRecipes.drinks[id], ingredients];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { meals: { ...progressRecipes.meals },
+        drinks: { [id]: teste } },
+    ));
+  } else {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { drinks: { [id]: [ingredients] }, meals: {} },
+    ));
+  }
+};
+
+export const removeDrinkIngredients = (id, ingredients) => {
+  const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const teste = progressRecipes.drinks[id].filter((e) => e !== ingredients);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    { meals: { ...progressRecipes.meals },
+      drinks: { [id]: teste } },
+  ));
 };
