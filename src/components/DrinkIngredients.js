@@ -11,7 +11,7 @@ function DrinkIngredients(props) {
       addDrinkIngredients(id, ingredients);
       if ('inProgressRecipes' in localStorage) {
         const getIngredients = JSON.parse(localStorage.getItem('inProgressRecipes'));
-        const teste = getIngredients.drinks[id].find((e) => e === ingredients);
+        const teste = getIngredients.cocktails[id].find((e) => e === ingredients);
         if (teste !== undefined) {
           setChecked(true);
         } else {
@@ -28,7 +28,7 @@ function DrinkIngredients(props) {
     if ('inProgressRecipes' in localStorage) {
       const getIngredients = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (getIngredients.drinks[id]) {
-        const teste = getIngredients.drinks[id].find((e) => e === ingredients);
+        const teste = getIngredients.cocktails[id].find((e) => e === ingredients);
         if (teste !== undefined) {
           setChecked(true);
         } else {

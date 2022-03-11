@@ -94,14 +94,14 @@ export const removeFoodIngredients = (id, ingredients) => {
 export const addDrinkIngredients = (id, ingredients) => {
   if ('inProgressRecipes' in localStorage) {
     const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const teste = [...progressRecipes.drinks[id], ingredients];
+    const teste = [...progressRecipes.cocktails[id], ingredients];
     localStorage.setItem('inProgressRecipes', JSON.stringify(
       { meals: { ...progressRecipes.meals },
-        drinks: { [id]: teste } },
+        cocktails: { [id]: teste } },
     ));
   } else {
     localStorage.setItem('inProgressRecipes', JSON.stringify(
-      { drinks: { [id]: [ingredients] }, meals: {} },
+      { cocktails: { [id]: [ingredients] }, meals: {} },
     ));
   }
 };
@@ -111,6 +111,6 @@ export const removeDrinkIngredients = (id, ingredients) => {
   const teste = progressRecipes.drinks[id].filter((e) => e !== ingredients);
   localStorage.setItem('inProgressRecipes', JSON.stringify(
     { meals: { ...progressRecipes.meals },
-      drinks: { [id]: teste } },
+      cocktails: { [id]: teste } },
   ));
 };
