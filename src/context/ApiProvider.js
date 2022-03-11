@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import apiContext from './apiContext';
@@ -12,9 +12,21 @@ import {
 } from '../services/useApi';
 
 function ApiProvider({ children }) {
-  const [apiDetails, setApiDetails] = useState(
-    { path: '', radio: 'ingredient', input: '', call: false, category: '' },
-  );
+  const [ingredient, setIngredient] = useState('');
+  const [pathname, setPathname] = useState('');
+  const [renderByIngredient, setRenderByIngredient] = useState({});
+  useEffect(() => {
+    apiIngredients(pathname, ingredient)
+      .then((data) => setRenderByIngredient(data.meals || data.drinks));
+  }, [ingredient, pathname]);
+
+  const [apiDetails, setApiDetails] = useState({
+    path: '',
+    radio: 'ingredient',
+    input: '',
+    call: false,
+    category: '',
+  });
 
   const [recipes, setRecipes] = useState([]);
   const location = useLocation();
@@ -100,12 +112,11 @@ function ApiProvider({ children }) {
     recipes,
     getCategory,
     filterByAll,
+    setIngredient,
+    setPathname,
+    renderByIngredient,
   };
-  return (
-    <apiContext.Provider value={ context }>
-      {children}
-    </apiContext.Provider>
-  );
+  return <apiContext.Provider value={ context }>{children}</apiContext.Provider>;
 }
 
 ApiProvider.propTypes = {
