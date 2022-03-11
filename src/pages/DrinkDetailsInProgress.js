@@ -58,7 +58,7 @@ function DrinkDetailsInProgress(props) {
             <h1 data-testid="recipe-title">{ drinks[0].strDrink }</h1>
             <img data-testid="recipe-photo" src={ drinks[0].strDrinkThumb } alt="drink" />
             <ShareButton />
-            <FavoritesButton recipeDetails={ drinks } />
+            <FavoritesButton recipeDetails={ drinks[0] } />
             <p data-testid="recipe-category">{ drinks[0].strCategory }</p>
             {ingredients.map((e, index) => (
               <DrinkIngredients
