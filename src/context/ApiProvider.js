@@ -14,7 +14,8 @@ import {
 function ApiProvider({ children }) {
   const [ingredient, setIngredient] = useState('');
   const [pathname, setPathname] = useState('');
-  const [renderByIngredient, setRenderByIngredient] = useState({});
+  const [renderByIngredient, setRenderByIngredient] = useState([]);
+
   useEffect(() => {
     if (ingredient && pathname) {
       apiIngredients(pathname, ingredient)

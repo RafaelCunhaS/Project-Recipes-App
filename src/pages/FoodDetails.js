@@ -8,7 +8,7 @@ import FavoritesButton from '../components/FavoritesButton';
 import { checkDoneRecipes, checkInProgress } from '../services/localStorage';
 
 function FoodDetails() {
-  const [recipeDetails, setRecipeDetails] = useState([]);
+  const [recipeDetails, setRecipeDetails] = useState({});
   const [recomendations, setRecomendations] = useState([]);
   const [renderButton, setRenderButton] = useState(true);
   const [continueRecipe, setContinueRecipe] = useState(false);

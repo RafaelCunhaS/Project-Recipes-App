@@ -65,5 +65,5 @@ export default function FavoritesButton({ recipeDetails }) {
 }
 
 FavoritesButton.propTypes = {
-  recipeDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
+  recipeDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };
