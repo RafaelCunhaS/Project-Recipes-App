@@ -17,6 +17,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
 import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
 import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
+import ExploreDrinksNationalities from './pages/ExploreDrinksNationalities';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ApiProvider from './context/ApiProvider';
 
@@ -52,6 +53,11 @@ function App() {
           exact
           path="/explore/foods/nationalities"
           component={ ExploreFoodsNationalities }
+        />
+        <Route
+          exact
+          path="/explore/drinks/nationalities"
+          component={ ExploreDrinksNationalities }
         />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
