@@ -14,10 +14,13 @@ import {
 function ApiProvider({ children }) {
   const [ingredient, setIngredient] = useState('');
   const [pathname, setPathname] = useState('');
-  const [renderByIngredient, setRenderByIngredient] = useState({});
+  const [renderByIngredient, setRenderByIngredient] = useState([]);
+
   useEffect(() => {
-    apiIngredients(pathname, ingredient)
-      .then((data) => setRenderByIngredient(data.meals || data.drinks));
+    if (ingredient && pathname) {
+      apiIngredients(pathname, ingredient)
+        .then((data) => setRenderByIngredient(data.meals || data.drinks));
+    }
   }, [ingredient, pathname]);
 
   const [apiDetails, setApiDetails] = useState({

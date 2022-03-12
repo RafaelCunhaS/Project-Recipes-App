@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import apiContext from '../context/apiContext';
@@ -10,11 +9,13 @@ import { getFoodIngredients } from '../services/useApi';
 function ExploreFoodsIngredients() {
   const { setIngredient, setPathname } = useContext(apiContext);
   const [useData, setUseData] = useState([]);
+
   useEffect(() => {
     getFoodIngredients().then((data) => {
       setUseData(data.meals);
     });
   }, []);
+
   return (
     <>
       <Header title="Explore Ingredients" renderSearch={ false } />

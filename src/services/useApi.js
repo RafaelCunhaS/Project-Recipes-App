@@ -74,3 +74,15 @@ export const getDrinkIngredients = async () => {
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };
+
+export const getNationalities = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getByArea = async (input) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${input}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
