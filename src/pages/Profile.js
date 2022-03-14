@@ -9,7 +9,7 @@ function Profile() {
   const history = useHistory();
 
   useEffect(() => {
-    setEmail(readEmail().email);
+    if (readEmail()) setEmail(readEmail().email);
   }, []);
 
   return (

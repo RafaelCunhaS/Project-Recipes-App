@@ -50,3 +50,39 @@ export const apiFilterByAll = async (path) => {
   const data = await fetch(URL).then((response) => response.json());
   return data;
 };
+
+export const getRandomFood = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getRandomDrink = async () => {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getFoodIngredients = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getDrinkIngredients = async () => {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getNationalities = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
+
+export const getByArea = async (input) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${input}`;
+  const data = await fetch(URL).then((response) => response.json());
+  return data;
+};
