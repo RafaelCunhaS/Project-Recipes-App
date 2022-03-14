@@ -29,18 +29,19 @@ function RecipeCardsOnLoadHelper() {
         ) : (
           recipes.drinks.slice(0, MAX_FOOD_ARRAY).map(
             ({ strDrinkThumb, strDrink, idDrink }, index) => (
-              <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
-                <Link
-                  to={ `/drinks/${idDrink}` }
-                >
+              <Link
+                to={ `/drinks/${idDrink}` }
+                key={ idDrink }
+              >
+                <div data-testid={ `${index}-recipe-card` }>
                   <img
                     data-testid={ `${index}-card-img` }
                     src={ strDrinkThumb }
                     alt="receita-"
                   />
-                </Link>
-                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-              </div>
+                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+                </div>
+              </Link>
             ),
           )
         )}
