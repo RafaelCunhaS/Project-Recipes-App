@@ -39,12 +39,12 @@ function RecipeCardsHelper() {
         ? (
           recipes.meals.slice(0, MAX_FOOD_ARRAY)
             .map(({ idMeal, strMealThumb, strMeal }, index) => (
-              <section
+              <Link
+                to={ `/foods/${idMeal}` }
                 key={ idMeal }
-                data-testid={ `${index}-recipe-card` }
               >
-                <Link
-                  to={ `/foods/${idMeal}` }
+                <section
+                  data-testid={ `${index}-recipe-card` }
                 >
                   <img
                     src={ strMealThumb }
@@ -53,9 +53,9 @@ function RecipeCardsHelper() {
                     width="150"
                     height="150"
                   />
-                </Link>
-                <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-              </section>
+                  <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+                </section>
+              </Link>
             ))
         ) : null }
 
@@ -63,12 +63,12 @@ function RecipeCardsHelper() {
         ? (
           recipes.drinks.slice(0, MAX_FOOD_ARRAY)
             .map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-              <section
+              <Link
+                to={ `/drinks/${idDrink}` }
                 key={ idDrink }
-                data-testid={ `${index}-recipe-card` }
               >
-                <Link
-                  to={ `/drinks/${idDrink}` }
+                <section
+                  data-testid={ `${index}-recipe-card` }
                 >
                   <img
                     src={ strDrinkThumb }
@@ -77,9 +77,9 @@ function RecipeCardsHelper() {
                     width="150"
                     height="150"
                   />
-                </Link>
-                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-              </section>
+                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+                </section>
+              </Link>
             ))
         ) : null }
     </div>

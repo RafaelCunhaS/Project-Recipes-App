@@ -15,21 +15,21 @@ function RecipeCardsSearch() {
         ? (
           meals.slice(0, MAX_FOOD_ARRAY)
             .map(({ idMeal, strMealThumb, strMeal }, index) => (
-              <section
+              <Link
                 key={ idMeal }
-                data-testid={ `${index}-recipe-card` }
+                to={ `/foods/${idMeal}` }
               >
-                <Link
-                  to={ `/foods/${idMeal}` }
+                <section
+                  data-testid={ `${index}-recipe-card` }
                 >
                   <img
                     src={ strMealThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
                   />
-                </Link>
-                <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-              </section>
+                  <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+                </section>
+              </Link>
             ))
         ) : null }
 
@@ -37,21 +37,21 @@ function RecipeCardsSearch() {
         ? (
           drinks.slice(0, MAX_FOOD_ARRAY)
             .map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-              <section
+              <Link
+                to={ `/drinks/${idDrink}` }
                 key={ idDrink }
-                data-testid={ `${index}-recipe-card` }
               >
-                <Link
-                  to={ `/drinks/${idDrink}` }
+                <section
+                  data-testid={ `${index}-recipe-card` }
                 >
                   <img
                     src={ strDrinkThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
                   />
-                </Link>
-                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-              </section>
+                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+                </section>
+              </Link>
             ))
         ) : null }
     </div>
