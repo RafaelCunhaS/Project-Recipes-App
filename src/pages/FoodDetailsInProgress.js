@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ShareButton from '../components/ShareButton';
 import FavoritesButton from '../components/FavoritesButton';
-import FoodIngredients from '../components/FoodIngredients';
 import { getFoodById } from '../services/useApi';
+import FoodDetailsInProgressHelper from '../components/FoodDetailsInProgressHelper';
 
 function FoodDetailsInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -60,18 +60,11 @@ function FoodDetailsInProgress(props) {
             <ShareButton />
             <FavoritesButton recipeDetails={ foods[0] } />
             <p data-testid="recipe-category">{ foods[0].strCategory }</p>
-            {ingredients.map((e, index) => (
-              <FoodIngredients
-                key={ index }
-                ingredients={ e }
-                id={ id }
-                index={ index }
-              />
-            ))}
-            {instructions.map((e, index) => (
-              <p data-testid="instructions" key={ index }>{e}</p>
-            ))}
-            <button data-testid="finish-recipe-btn" type="button">Finish recipe</button>
+            <FoodDetailsInProgressHelper
+              ingredients={ ingredients }
+              instructions={ instructions }
+              id={ id }
+            />
           </div>
         ) : <h1>Loading</h1> }
     </div>

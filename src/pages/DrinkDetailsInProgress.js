@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ShareButton from '../components/ShareButton';
 import { getDrinkById } from '../services/useApi';
 import FavoritesButton from '../components/FavoritesButton';
-import DrinkIngredients from '../components/DrinkIngredients';
+import DrinkDetailsInProgressHelper from '../components/DrinksDetailsInProgressHelper';
 
 function DrinkDetailsInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -60,18 +60,11 @@ function DrinkDetailsInProgress(props) {
             <ShareButton />
             <FavoritesButton recipeDetails={ drinks[0] } />
             <p data-testid="recipe-category">{ drinks[0].strCategory }</p>
-            {ingredients.map((e, index) => (
-              <DrinkIngredients
-                key={ index }
-                ingredients={ e }
-                id={ id }
-                index={ index }
-              />
-            ))}
-            {instructions.map((e, index) => (
-              <p data-testid="instructions" key={ index }>{e}</p>
-            ))}
-            <button data-testid="finish-recipe-btn" type="button">Finish recipe</button>
+            <DrinkDetailsInProgressHelper
+              ingredients={ ingredients }
+              instructions={ instructions }
+              id={ id }
+            />
           </div>
         ) : <h1>Loading</h1> }
     </div>

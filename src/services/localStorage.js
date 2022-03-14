@@ -108,7 +108,7 @@ export const addDrinkIngredients = (id, ingredients) => {
 
 export const removeDrinkIngredients = (id, ingredients) => {
   const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const teste = progressRecipes.drinks[id].filter((e) => e !== ingredients);
+  const teste = progressRecipes.cocktails[id].filter((e) => e !== ingredients);
   localStorage.setItem('inProgressRecipes', JSON.stringify(
     { meals: { ...progressRecipes.meals },
       cocktails: { [id]: teste } },

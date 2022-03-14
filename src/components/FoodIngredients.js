@@ -1,43 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { addFoodIngredients, removeFoodIngredients } from '../services/localStorage';
 
 function FoodIngredients(props) {
-  const [checked, setChecked] = useState(true);
-  const { ingredients, id, index } = props;
-  const saveIngredients = ({ target }) => {
-    if (target.checked) {
-      addFoodIngredients(id, ingredients);
-      if ('inProgressRecipes' in localStorage) {
-        const getIngredients = JSON.parse(localStorage.getItem('inProgressRecipes'));
-        const teste = getIngredients.meals[id].find((e) => e === ingredients);
-        if (teste !== undefined) {
-          setChecked(true);
-        } else {
-          setChecked(false);
-        }
-      }
-    } else {
-      setChecked(false);
-      removeFoodIngredients(id, ingredients);
-    }
-  };
-
-  useEffect(() => {
-    if ('inProgressRecipes' in localStorage) {
-      const getIngredients = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (getIngredients.meals[id]) {
-        const teste = getIngredients.meals[id].find((e) => e === ingredients);
-        if (teste !== undefined) {
-          setChecked(true);
-        } else {
-          setChecked(false);
-        }
-      }
-    } else {
-      setChecked(false);
-    }
-  }, []);
+  const { ingredients, saveIngredients, checked, index } = props;
 
   return (
     <div>
@@ -45,6 +10,7 @@ function FoodIngredients(props) {
         { ingredients }
         <input
           checked={ checked }
+          name={ ingredients }
           onChange={ saveIngredients }
           type="checkbox"
         />
@@ -53,10 +19,15 @@ function FoodIngredients(props) {
   );
 }
 
+FoodIngredients.defaultProps = {
+  checked: PropTypes.undefined,
+};
+
 FoodIngredients.propTypes = {
-  ingredients: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  saveIngredients: PropTypes.func.isRequired,
+  ingredients: PropTypes.node.isRequired,
+  checked: PropTypes.bool,
 };
 
 export default FoodIngredients;
