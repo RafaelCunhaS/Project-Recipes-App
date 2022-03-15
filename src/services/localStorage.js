@@ -114,3 +114,8 @@ export const removeDrinkIngredients = (id, ingredients) => {
       cocktails: { [id]: teste } },
   ));
 };
+
+export const addDoneRecipe = (obj) => {
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, obj]));
+};

@@ -2,10 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import DrinkIngredients from './DrinkIngredients';
-import { addDrinkIngredients, removeDrinkIngredients } from '../services/localStorage';
+import {
+  addDrinkIngredients, removeDrinkIngredients, addDoneRecipe,
+} from '../services/localStorage';
 
 function DrinkDetailsInProgressHelper(props) {
-  const { ingredients, id, instructions } = props;
+  const {
+    ingredients,
+    instructions,
+    alcoholicOrNot,
+    category,
+    id,
+    image,
+    name,
+    tag,
+  } = props;
   // Utilizando o estado callback para renderizar esse componente sempre que o checkbox for clicado.
   const [callback, setCallback] = useState(0);
   const history = useHistory();
@@ -23,6 +34,35 @@ function DrinkDetailsInProgressHelper(props) {
   };
 
   const handleClick = () => {
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const date = `${dia}/${mes}/${ano}`;
+    if (tag !== null) {
+      const tagArray = tag.split(',');
+      addDoneRecipe({
+        alcoholicOrNot,
+        category,
+        id,
+        image,
+        name,
+        doneDate: date,
+        tags: tagArray,
+        type: 'drink',
+      });
+    } else {
+      addDoneRecipe({
+        alcoholicOrNot,
+        category,
+        id,
+        image,
+        name,
+        doneDate: date,
+        tags: [],
+        type: 'drink',
+      });
+    }
     history.push('/done-recipes');
   };
 
@@ -78,9 +118,13 @@ function DrinkDetailsInProgressHelper(props) {
 }
 
 DrinkDetailsInProgressHelper.propTypes = {
-  ingredients: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired,
-  instructions: PropTypes.node.isRequired,
-};
+  ingredients: PropTypes.node,
+  id: PropTypes.string,
+  instructions: PropTypes.node,
+  alcoholicOrNot: PropTypes.string,
+  category: PropTypes.string,
+  image: PropTypes.string,
+  name: PropTypes.string,
+}.isRequired;
 
 export default DrinkDetailsInProgressHelper;

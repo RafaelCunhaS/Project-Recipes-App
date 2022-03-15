@@ -63,7 +63,12 @@ function DrinkDetailsInProgress(props) {
             <DrinkDetailsInProgressHelper
               ingredients={ ingredients }
               instructions={ instructions }
+              alcoholicOrNot={ drinks[0].strAlcoholic }
+              category={ drinks[0].strCategory }
               id={ id }
+              image={ drinks[0].strDrinkThumb }
+              name={ drinks[0].strDrink }
+              tag={ drinks[0].strTags }
             />
           </div>
         ) : <h1>Loading</h1> }
