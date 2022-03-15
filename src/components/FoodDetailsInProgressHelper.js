@@ -2,10 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FoodIngredients from './FoodIngredients';
-import { addFoodIngredients, removeFoodIngredients } from '../services/localStorage';
+import {
+  addFoodIngredients, removeFoodIngredients, addDoneRecipe,
+} from '../services/localStorage';
 
 function FoodDetailsInProgressHelper(props) {
-  const { ingredients, id, instructions } = props;
+  const { ingredients,
+    instructions,
+    category,
+    id,
+    image,
+    name,
+    nationality,
+    tag,
+  } = props;
   // Utilizando o estado callback para renderizar esse componente sempre que o checkbox for clicado.
   const [callback, setCallback] = useState(0);
   const history = useHistory();
@@ -23,6 +33,35 @@ function FoodDetailsInProgressHelper(props) {
   };
 
   const handleClick = () => {
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const date = `${dia}/${mes}/${ano}`;
+    if (tag !== null) {
+      const tagArray = tag.split(',');
+      addDoneRecipe({
+        category,
+        id,
+        image,
+        name,
+        nationality,
+        doneDate: date,
+        tags: tagArray,
+        type: 'food',
+      });
+    } else {
+      addDoneRecipe({
+        category,
+        id,
+        image,
+        name,
+        nationality,
+        doneDate: date,
+        tags: [],
+        type: 'food',
+      });
+    }
     history.push('/done-recipes');
   };
 
@@ -78,9 +117,13 @@ function FoodDetailsInProgressHelper(props) {
 }
 
 FoodDetailsInProgressHelper.propTypes = {
-  ingredients: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired,
-  instructions: PropTypes.node.isRequired,
-};
+  ingredients: PropTypes.node,
+  id: PropTypes.string,
+  instructions: PropTypes.node,
+  category: PropTypes.string,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  nationality: PropTypes.string,
+}.isRequired;
 
 export default FoodDetailsInProgressHelper;

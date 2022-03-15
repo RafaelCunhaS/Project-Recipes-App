@@ -63,7 +63,12 @@ function FoodDetailsInProgress(props) {
             <FoodDetailsInProgressHelper
               ingredients={ ingredients }
               instructions={ instructions }
+              category={ foods[0].strCategory }
               id={ id }
+              image={ foods[0].strMealThumb }
+              name={ foods[0].strMeal }
+              nationality={ foods[0].strArea }
+              tag={ foods[0].strTags }
             />
           </div>
         ) : <h1>Loading</h1> }
