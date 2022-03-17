@@ -51,15 +51,18 @@ function DrinkDetailsInProgress(props) {
   }, [drinks]);
 
   return (
-    <div>
+    <div className="food-details-container">
       {drinks.length === 1
         ? (
           <div>
-            <h1 data-testid="recipe-title">{ drinks[0].strDrink }</h1>
             <img data-testid="recipe-photo" src={ drinks[0].strDrinkThumb } alt="drink" />
-            <ShareButton />
-            <FavoritesButton recipeDetails={ drinks[0] } />
-            <p data-testid="recipe-category">{ drinks[0].strCategory }</p>
+            <h1 data-testid="recipe-title">{ drinks[0].strDrink }</h1>
+            <div className="share-fav-btns">
+              <ShareButton />
+              <FavoritesButton recipeDetails={ drinks[0] } />
+            </div>
+            <h3 data-testid="recipe-category">{ drinks[0].strCategory }</h3>
+            <h2>Ingredients</h2>
             <DrinkDetailsInProgressHelper
               ingredients={ ingredients }
               instructions={ instructions }

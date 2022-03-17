@@ -3,9 +3,9 @@ import { useParams, useHistory } from 'react-router-dom';
 import ShareButton from '../components/ShareButton';
 import { RECOMENDATIONS_LENGTH } from '../MAGIC_NUMBER';
 import { apiName, getFoodById } from '../services/useApi';
-import './FoodDetails.css';
 import FavoritesButton from '../components/FavoritesButton';
 import { checkDoneRecipes, checkInProgress } from '../services/localStorage';
+import './Details.css';
 
 function FoodDetails() {
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -35,55 +35,62 @@ function FoodDetails() {
         src={ recipeDetails.strMealThumb }
         alt="recipe"
         data-testid="recipe-photo"
-        width="150"
-        height="150"
       />
-      <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
-      <ShareButton />
-      <FavoritesButton recipeDetails={ recipeDetails } />
-      <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
-      {Object.keys(recipeDetails)
-        .filter((e) => e.includes('strIngredient'))
-        .map((ingredient, index) => (
-          <span key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {recipeDetails[ingredient]}
-          </span>))}
-      {Object.keys(recipeDetails)
-        .filter((e) => e.includes('strMeasure'))
-        .map((measure, index) => (
-          <span key={ measure } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {recipeDetails[measure]}
-          </span>))}
-      <p data-testid="instructions">{recipeDetails.strInstructions}</p>
+      <h1 data-testid="recipe-title">{recipeDetails.strMeal}</h1>
+      <div className="share-fav-btns">
+        <ShareButton />
+        <FavoritesButton recipeDetails={ recipeDetails } />
+      </div>
+      <h3 data-testid="recipe-category">{recipeDetails.strCategory}</h3>
+      <h2 className="details-h2">Ingredients</h2>
+      <div className="details-card">
+        <div className="ingredient">
+          {Object.keys(recipeDetails)
+            .filter((e) => e.includes('strIngredient'))
+            .filter((el) => recipeDetails[el] !== '')
+            .map((ingredient) => (
+              <span key={ ingredient }>
+                {recipeDetails[ingredient]}
+              </span>))}
+        </div>
+        <div className="measure">
+          {Object.keys(recipeDetails)
+            .filter((e) => e.includes('strMeasure'))
+            .filter((el) => recipeDetails[el] !== ' ')
+            .map((measure) => (
+              <span key={ measure } className="measure-text">
+                {recipeDetails[measure]}
+              </span>))}
+        </div>
+      </div>
+      <h2 className="details-h2">Instructions</h2>
+      <div className="details-card">
+        <p className="instructions-text">{recipeDetails.strInstructions}</p>
+      </div>
+      <h2 className="details-h2">Video</h2>
       <iframe
-        width="280"
-        height="200"
         title="Recipe Video"
         data-testid="video"
         src={ url }
       />
+      <h2 className="details-h2">Recommended</h2>
       <section className="recommended-cards-container">
         {recomendations.slice(0, RECOMENDATIONS_LENGTH)
-          .map((card, index) => (
-            <section
-              key={ card.idDrink }
-              data-testid={ `${index}-recomendation-card` }
-              show={ 2 }
-              className="recommended-cards"
-            >
-              <img
-                src={ card.strDrinkThumb }
-                alt="Recommended drink"
-                width="140"
-                height="140"
-              />
-              <h4>{card.strAlcoholic}</h4>
-              <h2 data-testid={ `${index}-recomendation-title` }>{card.strDrink}</h2>
-            </section>))}
+          .map((card) => (
+            <div key={ card.idDrink } className="recommended-cards recipes-cards">
+              <section className="recommended-card-single">
+                <img
+                  src={ card.strDrinkThumb }
+                  alt="Recommended drink"
+                />
+                <h4>{card.strAlcoholic}</h4>
+                <h2 className="recipes-cards-text h2">{card.strDrink}</h2>
+              </section>
+            </div>))}
       </section>
       {renderButton && (
         <button
-          className="start-btn"
+          className="start-btn buttons"
           type="button"
           data-testid="start-recipe-btn"
           onClick={ () => history.push(`/foods/${id}/in-progress`) }

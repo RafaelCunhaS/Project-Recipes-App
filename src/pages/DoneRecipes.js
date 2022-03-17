@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DoneRecipesCard from '../components/DoneRecipesCard';
 import DoneRecipeSFilter from '../components/DoneRecipesFilter';
 import Header from '../components/Header';
+import './DoneRecipes.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);

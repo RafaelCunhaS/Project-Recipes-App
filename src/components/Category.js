@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiContext from '../context/apiContext';
 import { MAX_FOOD_CATEGORY } from '../MAGIC_NUMBER';
+import './Category.css';
 
 function Category() {
   const location = useLocation();
@@ -26,13 +27,14 @@ function Category() {
   }, []);
 
   return (
-    <div>
+    <div className="button-filters-container">
       <button
         onClick={ ({ target }) => filterByAll(target) }
         type="button"
+        className="button-filters"
         data-testid="All-category-filter"
       >
-        Alls
+        All
       </button>
       {category !== undefined && location.pathname === '/foods'
         ? (
@@ -41,6 +43,7 @@ function Category() {
               onClick={ ({ target }) => getCategory(target) }
               type="button"
               key={ index }
+              className="button-filters"
               data-testid={ `${strCategory}-category-filter` }
             >
               { strCategory }
@@ -54,6 +57,7 @@ function Category() {
             <button
               onClick={ ({ target }) => getCategory(target) }
               type="button"
+              className="button-filters"
               key={ strCategory }
               data-testid={ `${strCategory}-category-filter` }
             >

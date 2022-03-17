@@ -60,6 +60,9 @@ export default function FavoritesButton({ recipeDetails }) {
       data-testid="favorite-btn"
       alt="Favorite"
       onClick={ handleClick }
+      width="35rem"
+      height="35rem"
+      className={ favorite ? 'heart' : undefined }
     />
   );
 }

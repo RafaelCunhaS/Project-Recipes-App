@@ -7,7 +7,7 @@ function RecipeCardsOnLoadHelper() {
   const location = useLocation();
   const { recipes } = useContext(apiContext);
   return (
-    <div>
+    <div className="recipes-cards-container">
       {location.pathname === '/foods'
         ? (
           recipes.meals.slice(0, MAX_FOOD_ARRAY).map(
@@ -15,6 +15,7 @@ function RecipeCardsOnLoadHelper() {
               <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
                 <Link
                   to={ `/foods/${idMeal}` }
+                  className="recipes-cards"
                 >
                   <img
                     data-testid={ `${index}-card-img` }
@@ -22,7 +23,12 @@ function RecipeCardsOnLoadHelper() {
                     alt="receita-"
                   />
                 </Link>
-                <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+                <p
+                  className="recipes-cards-text"
+                  data-testid={ `${index}-card-name` }
+                >
+                  { strMeal }
+                </p>
               </div>
             ),
           )
@@ -32,6 +38,7 @@ function RecipeCardsOnLoadHelper() {
               <Link
                 to={ `/drinks/${idDrink}` }
                 key={ idDrink }
+                className="recipes-cards"
               >
                 <div data-testid={ `${index}-recipe-card` }>
                   <img
@@ -39,7 +46,12 @@ function RecipeCardsOnLoadHelper() {
                     src={ strDrinkThumb }
                     alt="receita-"
                   />
-                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+                  <p
+                    className="recipes-cards-text"
+                    data-testid={ `${index}-card-name` }
+                  >
+                    { strDrink }
+                  </p>
                 </div>
               </Link>
             ),

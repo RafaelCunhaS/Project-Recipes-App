@@ -14,56 +14,65 @@ function DoneRecipesCard(props) {
   };
 
   return (
-    doneRecipes.map(
-      ({ image, id, category, name, nationality, tags, type, doneDate }, index) => (
-        <div key={ id }>
-          <Link
-            to={ `/${type}s/${id}` }
-          >
-            <img
-              className="favoriteRecipesImg"
-              data-testid={ `${index}-horizontal-image` }
-              src={ image }
-              alt="card"
-            />
-          </Link>
-          {type === 'drink'
-            ? (
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
+    <div className="recipes-cards-container">
+      {doneRecipes.map(
+        ({ image, id, category, name, nationality, tags, type, doneDate }, index) => (
+          <div key={ id } className="done-recipes-card">
+            <Link
+              to={ `/${type}s/${id}` }
+            >
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                src={ image }
+                alt="card"
+              />
+            </Link>
+            <div className="done-recipes-card-column">
+              {type === 'drink'
+                ? (
+                  <p
+                    data-testid={ `${index}-horizontal-top-text` }
+                    className="done-recipes-category"
+                  >
+                    {`${doneRecipes[index].alcoholicOrNot} - ${category}`}
+                  </p>
+                ) : (
+                  <p
+                    data-testid={ `${index}-horizontal-top-text` }
+                    className="done-recipes-category"
+                  >
+                    {`${nationality} - ${category}`}
+                  </p>
+                )}
+              <Link
+                to={ `/${type}s/${id}` }
               >
-                {`${doneRecipes[index].alcoholicOrNot} - ${category}`}
+                <h2 className="h2" data-testid={ `${index}-horizontal-name` }>{name}</h2>
+              </Link>
+              <p data-testid={ `${index}-horizontal-done-date` }>
+                {`Done in: ${doneDate}`}
               </p>
-            ) : (
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {`${nationality} - ${category}`}
-              </p>
-            )}
-          <Link
-            to={ `/${type}s/${id}` }
-          >
-            <p data-testid={ `${index}-horizontal-name` }>{name}</p>
-          </Link>
-          <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-          <input
-            name={ type }
-            value={ id }
-            type="image"
-            src={ shareIcon }
-            data-testid={ `${index}-horizontal-share-btn` }
-            alt="Share"
-            onClick={ shareClick }
-          />
-          {doneRecipes[0] !== undefined
-            ? (
-              <DoneRecipesCardTag tags={ tags } index={ index } />
-            ) : null }
-          {showLink && <p>Link copied!</p>}
-        </div>
-      ),
-    )
+              <input
+                name={ type }
+                value={ id }
+                type="image"
+                src={ shareIcon }
+                data-testid={ `${index}-horizontal-share-btn` }
+                alt="Share"
+                onClick={ shareClick }
+              />
+              {doneRecipes[0] !== undefined
+                ? (
+                  <div className="tags-container">
+                    <DoneRecipesCardTag tags={ tags } index={ index } />
+                  </div>
+                ) : null }
+              {showLink && <p>Link copied!</p>}
+            </div>
+          </div>
+        ),
+      )}
+    </div>
   );
 }
 

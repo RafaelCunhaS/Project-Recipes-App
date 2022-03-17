@@ -1,0 +1,35 @@
+.buttons {
+  display: block;
+  height: 4rem;
+  width: 95%;
+  margin: 2.4rem auto;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  background-color: #f37469;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3), 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.buttons:hover {
+  background-color: #be574d;
+}
+
+.nationalities-select {
+  display: block;
+  font-family: 'Handlee', cursive;
+  font-weight: 600;
+  width: 85%;
+  height: 3rem;
+  font-size: 1.4rem;
+  margin: 1rem auto;
+  padding: 0 0.9rem;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #fff1dc;
+  -webkit-appearance: none;
+  background-position-x: 270px;
+  border: none;
+  border-bottom: 2px solid black;
+  border-radius: 10px;
+}
+
+.nationalities-select:hover {
+  outline: none;
+}

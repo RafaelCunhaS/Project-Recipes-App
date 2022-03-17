@@ -34,7 +34,7 @@ function RecipeCardsHelper() {
   }, [path]);
 
   return (
-    <div>
+    <div className="recipes-cards-container">
       {recipes !== undefined && Object.keys(recipes)[0] === 'meals'
         ? (
           recipes.meals.slice(0, MAX_FOOD_ARRAY)
@@ -42,18 +42,23 @@ function RecipeCardsHelper() {
               <Link
                 to={ `/foods/${idMeal}` }
                 key={ idMeal }
+                className="recipes-cards"
               >
                 <section
                   data-testid={ `${index}-recipe-card` }
+                  className="cards"
                 >
                   <img
                     src={ strMealThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
-                    width="150"
-                    height="150"
                   />
-                  <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+                  <p
+                    className="recipes-cards-text"
+                    data-testid={ `${index}-card-name` }
+                  >
+                    { strMeal }
+                  </p>
                 </section>
               </Link>
             ))
@@ -66,18 +71,23 @@ function RecipeCardsHelper() {
               <Link
                 to={ `/drinks/${idDrink}` }
                 key={ idDrink }
+                className="recipes-cards"
               >
                 <section
                   data-testid={ `${index}-recipe-card` }
+                  className="cards"
                 >
                   <img
                     src={ strDrinkThumb }
                     alt="cardRecipe"
                     data-testid={ `${index}-card-img` }
-                    width="150"
-                    height="150"
                   />
-                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+                  <p
+                    className="recipes-cards-text"
+                    data-testid={ `${index}-card-name` }
+                  >
+                    { strDrink }
+                  </p>
                 </section>
               </Link>
             ))

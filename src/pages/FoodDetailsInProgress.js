@@ -4,6 +4,7 @@ import ShareButton from '../components/ShareButton';
 import FavoritesButton from '../components/FavoritesButton';
 import { getFoodById } from '../services/useApi';
 import FoodDetailsInProgressHelper from '../components/FoodDetailsInProgressHelper';
+import './DetailsInProgress.css';
 
 function FoodDetailsInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -51,15 +52,18 @@ function FoodDetailsInProgress(props) {
   }, [foods]);
 
   return (
-    <div>
+    <div className="food-details-container">
       {foods.length === 1
         ? (
           <div>
-            <h1 data-testid="recipe-title">{ foods[0].strMeal }</h1>
             <img data-testid="recipe-photo" src={ foods[0].strMealThumb } alt="drink" />
-            <ShareButton />
-            <FavoritesButton recipeDetails={ foods[0] } />
-            <p data-testid="recipe-category">{ foods[0].strCategory }</p>
+            <h1 data-testid="recipe-title">{ foods[0].strMeal }</h1>
+            <div className="share-fav-btns">
+              <ShareButton />
+              <FavoritesButton recipeDetails={ foods[0] } />
+            </div>
+            <h3 data-testid="recipe-category">{ foods[0].strCategory }</h3>
+            <h2>Ingredients</h2>
             <FoodDetailsInProgressHelper
               ingredients={ ingredients }
               instructions={ instructions }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function DoneRecipesCardTag(props) {
   const { tags, index } = props;
-  console.log(tags);
   return (
     <div>
       {tags.length > 0
@@ -12,6 +11,7 @@ function DoneRecipesCardTag(props) {
             <p
               data-testid={ `${index}-${value}-horizontal-tag` }
               key={ indice }
+              className="done-recipes-tags"
             >
               {value}
             </p>

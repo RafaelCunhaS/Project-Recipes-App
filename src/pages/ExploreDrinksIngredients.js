@@ -17,27 +17,35 @@ function ExploreDrinksIngredients() {
   return (
     <>
       <Header title="Explore Ingredients" renderSearch={ false } />
-      {useData.length > 0
-        && useData.slice(0, MAX_FOOD_ARRAY).map((data, index) => (
-          <Link
-            to="/drinks"
-            key={ data.strIngredient1 }
-            data-testid={ `${index}-ingredient-card` }
-            onClick={ () => {
-              setIngredient(data.strIngredient1);
-              setPathname('thecocktaildb');
-            } }
-          >
-            <img
-              src={ `https://www.thecocktaildb.com/images/ingredients/${data.strIngredient1}-Small.png` }
-              alt="drink"
-              width="140"
-              height="140"
-              data-testid={ `${index}-card-img` }
-            />
-            <p data-testid={ `${index}-card-name` }>{data.strIngredient1}</p>
-          </Link>
-        ))}
+      <div className="recipes-cards-container">
+        {useData.length > 0
+          && useData.slice(0, MAX_FOOD_ARRAY).map((data, index) => (
+            <Link
+              to="/drinks"
+              key={ data.strIngredient1 }
+              data-testid={ `${index}-ingredient-card` }
+              onClick={ () => {
+                setIngredient(data.strIngredient1);
+                setPathname('thecocktaildb');
+              } }
+              className="recipes-cards"
+            >
+              <img
+                src={ `https://www.thecocktaildb.com/images/ingredients/${data.strIngredient1}-Small.png` }
+                alt="drink"
+                width="140"
+                height="140"
+                data-testid={ `${index}-card-img` }
+              />
+              <p
+                className="recipes-cards-text"
+                data-testid={ `${index}-card-name` }
+              >
+                {data.strIngredient1}
+              </p>
+            </Link>
+          ))}
+      </div>
       <Footer />
     </>
   );

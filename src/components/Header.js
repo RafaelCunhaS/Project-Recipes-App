@@ -16,7 +16,7 @@ function Header({ title, renderSearch = true }) {
   return (
     <>
       <header className="header">
-        <section className="headerSearch">
+        <section className={ renderSearch ? 'header-search' : 'header-no-search' }>
           <input
             type="image"
             src={ profile }
@@ -38,11 +38,13 @@ function Header({ title, renderSearch = true }) {
       </header>
       <div>
         {renderSearchBar && (
-          <div>
+          <div className="radio-search-container">
             <input
               onChange={ ({ target }) => getInputValue(target) }
               data-testid="search-input"
               type="text"
+              className="radio-search-text"
+              placeholder="Search Recipe"
             />
             <RadioSearch />
           </div>

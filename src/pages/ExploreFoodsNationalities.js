@@ -39,31 +39,38 @@ function ExploreFoodsNationalities() {
         value={ nationality }
         onChange={ handleChange }
         data-testid="explore-by-nationality-dropdown"
+        className="nationalities-select"
       >
         <option data-testid="All-option">All</option>
         {nationalities.map(({ strArea }) => (
           <option key={ strArea } data-testid={ `${strArea}-option` }>{strArea}</option>
         ))}
       </select>
-      {renderFoods.slice(0, MAX_FOOD_ARRAY).map((food, index) => (
-        <Link
-          to={ `/foods/${food.idMeal}` }
-          key={ food.idMeal }
-        >
-          <section
-            data-testid={ `${index}-recipe-card` }
+      <div className="recipes-cards-container">
+        {renderFoods.slice(0, MAX_FOOD_ARRAY).map((food, index) => (
+          <Link
+            to={ `/foods/${food.idMeal}` }
+            key={ food.idMeal }
+            className="recipes-cards"
           >
-            <img
-              src={ food.strMealThumb }
-              alt="cardRecipe"
-              data-testid={ `${index}-card-img` }
-              width="140px"
-              height="140px"
-            />
-            <p data-testid={ `${index}-card-name` }>{ food.strMeal }</p>
-          </section>
-        </Link>
-      ))}
+            <section
+              data-testid={ `${index}-recipe-card` }
+            >
+              <img
+                src={ food.strMealThumb }
+                alt="cardRecipe"
+                data-testid={ `${index}-card-img` }
+              />
+              <p
+                className="recipes-cards-text"
+                data-testid={ `${index}-card-name` }
+              >
+                { food.strMeal }
+              </p>
+            </section>
+          </Link>
+        ))}
+      </div>
       <Footer />
     </>
   );

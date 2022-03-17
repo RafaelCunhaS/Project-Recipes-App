@@ -6,14 +6,18 @@ function DrinkIngredients(props) {
 
   return (
     <div>
-      <label data-testid={ `${index}-ingredient-step` } htmlFor="ingredients">
-        { ingredients }
+      <label
+        className="strikethrough"
+        data-testid={ `${index}-ingredient-step` }
+        htmlFor="ingredients"
+      >
         <input
           checked={ checked }
           name={ ingredients }
           onChange={ saveIngredients }
           type="checkbox"
         />
+        <span>{ ingredients }</span>
       </label>
     </div>
   );

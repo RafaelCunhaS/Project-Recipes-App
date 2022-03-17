@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 function DoneRecipeSFilter(props) {
   const { handleFilter } = props;
   return (
-    <div>
+    <div className="favorite-filters">
       <button
         name="All"
         onClick={ handleFilter }
         data-testid="filter-by-all-btn"
         type="button"
+        className="button-filters"
       >
         All
       </button>
@@ -18,6 +19,7 @@ function DoneRecipeSFilter(props) {
         onClick={ handleFilter }
         data-testid="filter-by-food-btn"
         type="button"
+        className="button-filters"
       >
         Foods
       </button>
@@ -26,6 +28,7 @@ function DoneRecipeSFilter(props) {
         onClick={ handleFilter }
         data-testid="filter-by-drink-btn"
         type="button"
+        className="button-filters"
       >
         Drinks
       </button>

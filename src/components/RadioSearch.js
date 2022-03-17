@@ -53,8 +53,8 @@ function RadioSearch() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <>
-      <label htmlFor="ingredient">
+    <div className="radio-buttons">
+      <label htmlFor="ingredient" className="radio-btn">
         Ingredient
         <input
           defaultChecked
@@ -67,7 +67,7 @@ function RadioSearch() {
         />
       </label>
 
-      <label htmlFor="name">
+      <label htmlFor="name" className="radio-btn">
         Name
         <input
           onClick={ ({ target }) => getRadioValue(target) }
@@ -79,7 +79,7 @@ function RadioSearch() {
         />
       </label>
 
-      <label htmlFor="firstLetter">
+      <label htmlFor="firstLetter" className="radio-btn">
         First letter
         <input
           onClick={ ({ target }) => getRadioValue(target) }
@@ -98,7 +98,7 @@ function RadioSearch() {
       >
         Search
       </button>
-    </>
+    </div>
   );
 }
 

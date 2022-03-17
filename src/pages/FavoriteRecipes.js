@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FavoriteRecipesCard from '../components/FavoriteRecipesCard';
 import FavoriteRecipesFilter from '../components/FavoriteRecipesFilter';
 import Header from '../components/Header';
+import './FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [callback, setCallback] = useState(0);

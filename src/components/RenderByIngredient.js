@@ -6,23 +6,24 @@ import { MAX_FOOD_ARRAY } from '../MAGIC_NUMBER';
 export default function RenderByIngredient() {
   const { renderByIngredient } = useContext(apiContext);
   return (
-    <div>
+    <div className="recipes-cards-container">
       {renderByIngredient.slice(0, MAX_FOOD_ARRAY).map((ingredient, index) => (
         <Link
           to="/foods"
           key={ ingredient.idMeal || ingredient.idDrink }
           data-testid={ `${index}-recipe-card` }
+          className="recipes-cards"
         >
-          <img
-            src={ ingredient.strMealThumb || ingredient.strDrinkThumb }
-            alt="food"
-            width="140"
-            height="140"
-            data-testid={ `${index}-card-img` }
-          />
-          <p data-testid={ `${index}-card-name` }>
-            {ingredient.strMeal || ingredient.strDrink}
-          </p>
+          <section>
+            <img
+              src={ ingredient.strMealThumb || ingredient.strDrinkThumb }
+              alt="food"
+              data-testid={ `${index}-card-img` }
+            />
+            <p className="recipes-cards-text" data-testid={ `${index}-card-name` }>
+              {ingredient.strMeal || ingredient.strDrink}
+            </p>
+          </section>
         </Link>
       ))}
     </div>

@@ -91,26 +91,40 @@ function FoodDetailsInProgressHelper(props) {
 
   return (
     <div>
-      {ingredients.map((e, index) => (
-        <FoodIngredients
-          checked={ verifyIngredient(e) }
-          saveIngredients={ saveIngredients }
-          key={ index }
-          ingredients={ e }
-          id={ id }
-          index={ index }
-        />
-      ))}
-      {instructions.map((e, index) => (
-        <p data-testid="instructions" key={ index }>{e}</p>
-      ))}
+      <div className="details-card">
+        <div className="progress-card">
+          {ingredients.map((e, index) => (
+            <FoodIngredients
+              checked={ verifyIngredient(e) }
+              saveIngredients={ saveIngredients }
+              key={ index }
+              ingredients={ e }
+              id={ id }
+              index={ index }
+            />
+          ))}
+        </div>
+      </div>
+      <h2>Instructions</h2>
+      <div className="details-card">
+        {instructions.map((e, index) => (
+          <p
+            className="progress-card progress-p"
+            data-testid="instructions"
+            key={ index }
+          >
+            {e}
+          </p>
+        ))}
+      </div>
       <button
         disabled={ handleButton() }
         data-testid="finish-recipe-btn"
         type="button"
         onClick={ handleClick }
+        className="buttons"
       >
-        Finish recipe
+        Finish Recipe
       </button>
     </div>
   );

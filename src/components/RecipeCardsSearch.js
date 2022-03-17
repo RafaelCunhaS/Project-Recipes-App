@@ -13,46 +13,60 @@ function RecipeCardsSearch() {
     <div>
       {path === 'themealdb' && meals
         ? (
-          meals.slice(0, MAX_FOOD_ARRAY)
-            .map(({ idMeal, strMealThumb, strMeal }, index) => (
-              <Link
-                key={ idMeal }
-                to={ `/foods/${idMeal}` }
-              >
-                <section
-                  data-testid={ `${index}-recipe-card` }
+          <div className="recipes-cards-container">
+            {meals.slice(0, MAX_FOOD_ARRAY)
+              .map(({ idMeal, strMealThumb, strMeal }, index) => (
+                <Link
+                  key={ idMeal }
+                  to={ `/foods/${idMeal}` }
+                  className="recipes-cards"
                 >
-                  <img
-                    src={ strMealThumb }
-                    alt="cardRecipe"
-                    data-testid={ `${index}-card-img` }
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-                </section>
-              </Link>
-            ))
+                  <section
+                    data-testid={ `${index}-recipe-card` }
+                  >
+                    <img
+                      src={ strMealThumb }
+                      alt="cardRecipe"
+                      data-testid={ `${index}-card-img` }
+                    />
+                    <p
+                      className="recipes-cards-text"
+                    >
+                      { strMeal }
+                    </p>
+                  </section>
+                </Link>
+              ))}
+          </div>
         ) : null }
 
       {path === 'thecocktaildb' && drinks
         ? (
-          drinks.slice(0, MAX_FOOD_ARRAY)
-            .map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-              <Link
-                to={ `/drinks/${idDrink}` }
-                key={ idDrink }
-              >
-                <section
-                  data-testid={ `${index}-recipe-card` }
+          <div className="recipes-cards-container">
+            {drinks.slice(0, MAX_FOOD_ARRAY)
+              .map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+                <Link
+                  to={ `/drinks/${idDrink}` }
+                  key={ idDrink }
+                  className="recipes-cards"
                 >
-                  <img
-                    src={ strDrinkThumb }
-                    alt="cardRecipe"
-                    data-testid={ `${index}-card-img` }
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-                </section>
-              </Link>
-            ))
+                  <section
+                    data-testid={ `${index}-recipe-card` }
+                  >
+                    <img
+                      src={ strDrinkThumb }
+                      alt="cardRecipe"
+                      data-testid={ `${index}-card-img` }
+                    />
+                    <p
+                      className="recipes-cards-text"
+                    >
+                      { strDrink }
+                    </p>
+                  </section>
+                </Link>
+              ))}
+          </div>
         ) : null }
     </div>
   );

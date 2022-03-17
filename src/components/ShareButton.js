@@ -26,6 +26,8 @@ export default function ShareButton() {
         data-testid="share-btn"
         alt="Share"
         onClick={ shareClick }
+        width="35rem"
+        height="35rem"
       />
       {showLink && <p>Link copied!</p>}
     </div>

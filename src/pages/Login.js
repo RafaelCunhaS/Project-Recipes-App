@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PASSWORD_LENGTH } from '../MAGIC_NUMBER';
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -31,17 +32,21 @@ function Login() {
   }
 
   return (
-    <form>
+    <form className="login-container">
       <input
         data-testid="email-input"
         type="email"
+        className="login-inputs"
         onChange={ handleChange }
+        placeholder="Email"
         value={ email }
         name="email"
       />
       <input
         type="password"
         data-testid="password-input"
+        className="login-inputs"
+        placeholder="Password"
         onChange={ handleChange }
         value={ password }
         name="password"
@@ -49,6 +54,7 @@ function Login() {
       <button
         type="button"
         data-testid="login-submit-btn"
+        className="login-btn"
         disabled={ button }
         onClick={ handleClick }
       >
