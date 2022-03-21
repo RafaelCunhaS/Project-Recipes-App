@@ -33,6 +33,7 @@ function Login() {
 
   return (
     <form className="login-container">
+      <h1 className="title">Palmirinha&apos;s CookBook</h1>
       <input
         data-testid="email-input"
         type="email"
