@@ -10,6 +10,7 @@ const emailId = 'profile-email';
 const doneButtonId = 'profile-done-btn';
 const favoriteButtonId = 'profile-favorite-btn';
 const logoutButtonId = 'profile-logout-btn';
+const redirect = 'Redireciona o usuário para a rota correta';
 
 describe('Profile screen', () => {
   beforeEach(() => {
@@ -76,7 +77,7 @@ describe('Profile screen', () => {
     });
 
   describe('85 - Redirecione a pessoa usuária ao clicar no botão de Done Recipes', () => {
-    it('Redireciona para a rota correta', () => {
+    it(redirect, () => {
       const { history } = renderWithRouter(
         <ApiProvider>
           <App />
@@ -90,6 +91,38 @@ describe('Profile screen', () => {
       });
       const doneText = screen.getByRole('heading', { name: /done recipes/i });
       expect(doneText).toBeInTheDocument();
+    });
+  });
+  describe('85 - Redirecione o usuário ao clicar no botão de Favorite Recipes', () => {
+    it(redirect, () => {
+      const { history } = renderWithRouter(
+        <ApiProvider>
+          <App />
+        </ApiProvider>,
+      );
+      history.push('/profile');
+      const favoriteBtn = screen.getByTestId(favoriteButtonId);
+      act(() => {
+        userEvent.click(favoriteBtn);
+      });
+      const favoriteText = screen.getByRole('heading', { name: /favorite recipes/i });
+      expect(favoriteText).toBeInTheDocument();
+    });
+  });
+  describe('85 - Redirecione o usuário ao clicar no botão de Logout', () => {
+    it(redirect, () => {
+      const { history } = renderWithRouter(
+        <ApiProvider>
+          <App />
+        </ApiProvider>,
+      );
+      history.push('/profile');
+      const logoutBtn = screen.getByTestId(logoutButtonId);
+      act(() => {
+        userEvent.click(logoutBtn);
+      });
+      const loginText = screen.getByText('Login');
+      expect(loginText).toBeInTheDocument();
     });
   });
 });

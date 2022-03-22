@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function DoneRecipesCardTag(props) {
   const { tags, index } = props;
-  console.log(tags);
   return (
     <div>
       {tags.length > 0

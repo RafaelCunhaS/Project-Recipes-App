@@ -9,6 +9,7 @@ function FoodIngredients(props) {
       <label data-testid={ `${index}-ingredient-step` } htmlFor="ingredients">
         { ingredients }
         <input
+          data-testid="food-checkboxes"
           checked={ checked }
           name={ ingredients }
           onChange={ saveIngredients }

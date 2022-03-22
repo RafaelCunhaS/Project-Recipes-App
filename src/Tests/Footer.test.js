@@ -10,7 +10,7 @@ const drinkFooterId = 'drinks-bottom-btn';
 const exploreFooterId = 'explore-bottom-btn';
 const foodFooterId = 'food-bottom-btn';
 
-describe('19 - Verifica os elementos do footer', () => {
+describe('Verifica os elementos do footer', () => {
   it('Tem os data-testids drinks-bottom-btn, explore-bottom-btn e food-bottom-btn',
     () => {
       renderWithRouter(
@@ -25,6 +25,48 @@ describe('19 - Verifica os elementos do footer', () => {
       expect(drinkFooter).toBeInTheDocument();
       expect(exploreFooter).toBeInTheDocument();
       expect(foodFooter).toBeInTheDocument();
+    });
+  it('Renderiza a página drinks ao clicar no ícone de bebida',
+    async () => {
+      const { history } = renderWithRouter(
+        <ApiProvider>
+          <App />
+        </ApiProvider>,
+      );
+      history.push('/foods');
+      const drinksBtn = await screen.findByTestId(drinkFooterId);
+      userEvent.click(drinksBtn);
+
+      const page = await screen.findByText('Drinks');
+      expect(page).toBeInTheDocument();
+    });
+  it('Renderiza a página foods ao clicar no ícone de comida',
+    async () => {
+      const { history } = renderWithRouter(
+        <ApiProvider>
+          <App />
+        </ApiProvider>,
+      );
+      history.push('/drinks');
+      const drinksBtn = await screen.findByTestId(foodFooterId);
+      userEvent.click(drinksBtn);
+
+      const page = await screen.findByText('Foods');
+      expect(page).toBeInTheDocument();
+    });
+  it('Renderiza a página explore ao clicar no ícone de bússola',
+    async () => {
+      const { history } = renderWithRouter(
+        <ApiProvider>
+          <App />
+        </ApiProvider>,
+      );
+      history.push('/drinks');
+      const drinksBtn = await screen.findByTestId(exploreFooterId);
+      userEvent.click(drinksBtn);
+
+      const page = await screen.findByText('Explore');
+      expect(page).toBeInTheDocument();
     });
 });
 
