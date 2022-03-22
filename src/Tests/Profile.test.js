@@ -10,7 +10,7 @@ const emailId = 'profile-email';
 const doneButtonId = 'profile-done-btn';
 const favoriteButtonId = 'profile-favorite-btn';
 const logoutButtonId = 'profile-logout-btn';
-const redirect = 'Redireciona para a rota correta';
+const redirect = 'Redireciona o usuário para a rota correta';
 
 describe('Profile screen', () => {
   beforeEach(() => {
