@@ -38,30 +38,17 @@ function FoodDetailsInProgressHelper(props) {
     const mes = String(data.getMonth() + 1).padStart(2, '0');
     const ano = data.getFullYear();
     const date = `${dia}/${mes}/${ano}`;
-    if (tag !== null) {
-      const tagArray = tag.split(',');
-      addDoneRecipe({
-        category,
-        id,
-        image,
-        name,
-        nationality,
-        doneDate: date,
-        tags: tagArray,
-        type: 'food',
-      });
-    } else {
-      addDoneRecipe({
-        category,
-        id,
-        image,
-        name,
-        nationality,
-        doneDate: date,
-        tags: [],
-        type: 'food',
-      });
-    }
+    const tagArray = tag.split(',');
+    addDoneRecipe({
+      category,
+      id,
+      image,
+      name,
+      nationality,
+      doneDate: date,
+      tags: tagArray || [],
+      type: 'food',
+    });
     history.push('/done-recipes');
   };
 
