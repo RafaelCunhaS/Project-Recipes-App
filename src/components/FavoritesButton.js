@@ -45,9 +45,8 @@ export default function FavoritesButton({ recipeDetails }) {
 
   useEffect(() => {
     const favorites = readFavorites();
-    if (!favorites.some((recipe) => recipe.id === id)) {
-      console.log();
-      if (favorite) addFavorite(getValues());
+    if (favorite && !favorites.some((recipe) => recipe.id === id)) {
+      addFavorite(getValues());
     }
     if (!favorite) removeFavorite(recipeDetails.idMeal || recipeDetails.idDrink);
   // eslint-disable-next-line react-hooks/exhaustive-deps

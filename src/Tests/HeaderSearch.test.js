@@ -49,6 +49,7 @@ describe('17 - Mostre as receitas em cards caso mais de uma receita seja encontr
           </ApiProvider>,
         );
         history.push('/drinks');
+
         const searchBtn = screen.getByTestId(profileButton);
         userEvent.click(searchBtn);
         const searchInput = screen.getByTestId(searchInputId);

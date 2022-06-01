@@ -31,6 +31,7 @@ function RecipeCardsSearch() {
                     />
                     <p
                       className="recipes-cards-text"
+                      data-testid={ `${index}-card-name` }
                     >
                       { strMeal }
                     </p>
@@ -60,6 +61,7 @@ function RecipeCardsSearch() {
                     />
                     <p
                       className="recipes-cards-text"
+                      data-testid={ `${index}-card-name` }
                     >
                       { strDrink }
                     </p>

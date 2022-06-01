@@ -4,7 +4,7 @@ import apiContext from '../context/apiContext';
 import { MAX_FOOD_ARRAY } from '../MAGIC_NUMBER';
 
 function RecipeCardsHelper() {
-  const [recipes, setRecipes] = useState();
+  const [recipes, setRecipes] = useState([]);
   const { apiDetails: { path } } = useContext(apiContext);
   const location = useLocation();
 
