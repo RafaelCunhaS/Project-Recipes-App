@@ -15,7 +15,6 @@ function DrinkDetailsInProgressHelper(props) {
     id,
     image,
     name,
-    tag,
   } = props;
   // Utilizando o estado callback para renderizar esse componente sempre que o checkbox for clicado.
   const [callback, setCallback] = useState(0);
@@ -39,30 +38,16 @@ function DrinkDetailsInProgressHelper(props) {
     const mes = String(data.getMonth() + 1).padStart(2, '0');
     const ano = data.getFullYear();
     const date = `${dia}/${mes}/${ano}`;
-    if (tag !== null) {
-      const tagArray = tag.split(',');
-      addDoneRecipe({
-        alcoholicOrNot,
-        category,
-        id,
-        image,
-        name,
-        doneDate: date,
-        tags: tagArray,
-        type: 'drink',
-      });
-    } else {
-      addDoneRecipe({
-        alcoholicOrNot,
-        category,
-        id,
-        image,
-        name,
-        doneDate: date,
-        tags: [],
-        type: 'drink',
-      });
-    }
+    addDoneRecipe({
+      alcoholicOrNot,
+      category,
+      id,
+      image,
+      name,
+      doneDate: date,
+      tags: [],
+      type: 'drink',
+    });
     history.push('/done-recipes');
   };
 

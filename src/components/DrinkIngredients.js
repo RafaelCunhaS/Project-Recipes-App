@@ -12,6 +12,7 @@ function DrinkIngredients(props) {
         htmlFor="ingredients"
       >
         <input
+          data-testid="drink-checkboxes"
           checked={ checked }
           name={ ingredients }
           onChange={ saveIngredients }
